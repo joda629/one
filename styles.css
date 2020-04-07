@@ -1,0 +1,168 @@
+*
+{
+    margin          : 0;
+    padding         : 0;
+    box-sizing      : border-box;
+    color           : #fff;
+    font-family     : 'Press Start 2P', cursive;
+}
+
+
+h2 
+{
+    font-size       : 1rem;
+}
+
+input,
+textarea,
+ul 
+{
+    font-size       : .8rem;
+}
+
+body 
+{ 
+    background-color   : #222;
+}
+
+.app
+{
+    //border          : 2px solid red;
+}
+
+.title
+{
+    background-color    : #111;
+    color               : deeppink;
+    border-radius       : .5rem;
+    transform           : rotate(5deg);
+}
+
+.title::before,
+.title::after
+{
+    content             :"";
+    width               : .2rem;
+    height              : 50px;
+    background-color    : deeppink;
+    border-radius       : .2rem;
+    display             : inline-block;
+    transform           : rotate(-2deg) translatey(-50px);
+}
+
+
+.title,
+.show__twt, 
+.title__twt
+{
+    width           : max-content;
+    margin          : 2rem auto;
+    padding         : .5rem;
+}
+
+
+.main 
+{
+    //border          : 2px solid deeppink;
+}
+
+.form__twt
+{
+    //border          : 2px solid dodgerblue;
+}
+
+.form 
+{
+    //border          : 2px solid;
+}
+
+.form  > *
+{
+    margin          : 1rem auto;
+    display         : block;
+}
+
+.text
+{
+   max-width        : 80%;
+   min-width        : 80%;
+   resize           : none;
+   padding          : .5rem;
+   border-radius    : .5rem;
+   border           : 1px solid #333;
+   outline          : none;
+   background-color : rgba(255,255,255 , .2);
+}
+
+
+.text:invalid
+{
+    border-color    : deeppink;
+}
+
+.submit 
+{
+    cursor          : pointer;
+    width           : 80%;
+    font-weight     : 700;
+    text-transform  : uppercase;
+    background      : hsl(328, 100%, 54%);
+    box-shadow      : 2px 4px 2px hsl(328, 100%, 34%);
+    border          : none;
+    padding         : .5rem;
+    border-radius   : .5rem;
+    color           : #fff;
+    outline         : none;
+    transition      :  all .5s linear;
+}
+
+.submit:hover
+{
+    transform   : translateY(3px);
+    box-shadow  : none;
+}
+
+.show 
+{
+    margin           : 2rem 0;
+}
+
+.show__twiits
+{
+    //border          : 2px solid blue;
+    width           : 80%;
+    margin          : 0 auto;
+    padding         : .5rem;
+    border-radius   : .5rem;
+    list-style      : circle inside ;
+}
+
+.li 
+{
+    margin-bottom   : .5rem ;
+    //border          : 2px solid red;
+    padding         : .2rem;
+}
+
+.li::after 
+{
+    content         : "x";
+    float           : right;
+    color           : deeppink;
+    cursor          : pointer;
+
+}
+
+
+@media (min-width: 700px)
+{
+
+    .form,
+    .show 
+    {
+        margin      : 0 auto;
+        width       : 70%;
+    }
+
+
+}
