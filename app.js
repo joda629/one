@@ -4,7 +4,7 @@
 
 
 // variable que accede al textarea 
-var txt=document.getElementById("txt");
+let txt=document.getElementById("txt");
 
 
 // variables que selecciona al ul 
@@ -12,29 +12,90 @@ let ul=document.getElementById("ul");
 
 //variable que accede al btn submit
 let btn=document.getElementById("submit");
-
+let li, twt;
 
 // ponemos a la escucha nuestro btn submit para que agrege el twiit a la zona de twiits
 
+document.addEventListener("DOMContentLoaded", show);
+
 btn.addEventListener("click", function(e)
 {
-    // para cuando se de click en el btn no lo envia a niguna lado 
-    e.preventDefault();    
+    e.preventDefault();
 
-    // crearemos el elemento li 
-    let li=document.createElement("li");
 
-    // le damos una clase 
-    li.classList.add("li");
+    twt=txt.value;
+  
+    agregar(twt);
 
-    // le añadimos el li creado al ul 
-    ul.appendChild(li);
-
-    //le mandamos al li el contenido que escribimos
-    li.innerHTML=txt.value;
-
-    txt.value="";
 });
+
+
+
+// 1 se verifica si hay algo en localstorage
+//obtenemos los twiis del localstorage
+function getTwt()
+{
+    let twts;
+
+    // revisar valores localStorage 
+
+    // si en localstorage no hay nada, crea un array
+
+    if(localStorage.getItem("Twiit") === null)
+    {
+        twts= [];
+    }
+    else 
+    {
+        //si encuentra algo lo pasa a la variable twts en forma de json 
+        twts= JSON.parse(localStorage.getItem("Twiit"));
+    }
+
+    return twts;
+}
+
+// 2 se agregan al localstorage
+// add to localStorage
+// recibe por parametro la variable twt que contiene lo que el user escribio en el input
+function agregar(twt)
+{
+    let twts;
+    twts=getTwt();
+
+    // add localStorage
+    twts.push(twt);
+
+    localStorage.setItem("Twiit", JSON.stringify(twts));
+}
+
+// muestrar los datos del localstorage
+function show()
+{
+    let twts;
+
+    twts= getTwt();
+
+    twts.forEach(function(tw)
+    {
+
+        // crearemos el elemento li 
+        li=document.createElement("li");
+
+        // le damos una clase 
+        li.classList.add("li");
+        //le mandamos al li el contenido que escribimos
+        li.innerText = tw;
+
+        // le añadimos el li creado al ul 
+        ul.appendChild(li);
+
+        txt.value= "";
+
+    });
+
+}
+
+
 
 
 // cuanndo le den click en la x lo borraremos 
@@ -48,10 +109,35 @@ ul.addEventListener("click", function(e)
         // si le dieron aceptar lo eliminamos
         if(msg == true )
         {
-            e.target.remove();
+            borrar(e.target.textContent);
         }
     }
 });
 
+//borrar de localstorage
+function borrar(twt)
+{
+    let twts, nuevoTwt;
+
+    // se crea una nueva cadena cuando le hemos creado tags dentro del li con esto las eliminamos
+    //nuevoTwt = twt.substring(0,twt.length);
+
+    twts= getTwt();
+
+    twts.forEach(function(tw, index)
+    {
+        if(twt === tw)
+        {
+            twts.splice(index , 1);
+        }
+    });
+
+    localStorage.setItem("Twiit", JSON.stringify(twts))
+}
 
 
+
+
+//localStorage.setItem("name", "joda");
+//localStorage.removeItem("name");
+//console.log(localStorage.getItem("name"));
